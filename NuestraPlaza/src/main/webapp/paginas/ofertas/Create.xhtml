@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOfertasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_idOfertas}" for="idOfertas" />
+                    <h:inputText id="idOfertas" value="#{ofertasController.selected.idOfertas}" title="#{bundle.CreateOfertasTitle_idOfertas}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_idOfertas}"/>
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_fechaCosecha}" for="fechaCosecha" />
+                    <h:inputText id="fechaCosecha" value="#{ofertasController.selected.fechaCosecha}" title="#{bundle.CreateOfertasTitle_fechaCosecha}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_fechaCosecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{ofertasController.selected.cantidad}" title="#{bundle.CreateOfertasTitle_cantidad}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_cantidad}"/>
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{ofertasController.selected.valor}" title="#{bundle.CreateOfertasTitle_valor}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_codigoVendedor}" for="codigoVendedor" />
+                    <h:selectOneMenu id="codigoVendedor" value="#{ofertasController.selected.codigoVendedor}" title="#{bundle.CreateOfertasTitle_codigoVendedor}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_codigoVendedor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateOfertasLabel_idProducto}" for="idProducto" />
+                    <h:selectOneMenu id="idProducto" value="#{ofertasController.selected.idProducto}" title="#{bundle.CreateOfertasTitle_idProducto}" required="true" requiredMessage="#{bundle.CreateOfertasRequiredMessage_idProducto}">
+                        <f:selectItems value="#{produtosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ofertasController.create}" value="#{bundle.CreateOfertasSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ofertasController.prepareList}" value="#{bundle.CreateOfertasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOfertasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditVentasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditVentasLabel_idVenta}" for="idVenta" />
+                    <h:inputText id="idVenta" value="#{ventasController.selected.idVenta}" title="#{bundle.EditVentasTitle_idVenta}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_idVenta}"/>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_fechaVenta}" for="fechaVenta" />
+                    <h:inputText id="fechaVenta" value="#{ventasController.selected.fechaVenta}" title="#{bundle.EditVentasTitle_fechaVenta}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_fechaVenta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{ventasController.selected.cantidad}" title="#{bundle.EditVentasTitle_cantidad}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_cantidad}"/>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{ventasController.selected.valor}" title="#{bundle.EditVentasTitle_valor}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_codigoVendedor}" for="codigoVendedor" />
+                    <h:selectOneMenu id="codigoVendedor" value="#{ventasController.selected.codigoVendedor}" title="#{bundle.EditVentasTitle_codigoVendedor}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_codigoVendedor}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_codigoComprador}" for="codigoComprador" />
+                    <h:selectOneMenu id="codigoComprador" value="#{ventasController.selected.codigoComprador}" title="#{bundle.EditVentasTitle_codigoComprador}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_codigoComprador}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditVentasLabel_idProducto}" for="idProducto" />
+                    <h:selectOneMenu id="idProducto" value="#{ventasController.selected.idProducto}" title="#{bundle.EditVentasTitle_idProducto}" required="true" requiredMessage="#{bundle.EditVentasRequiredMessage_idProducto}">
+                        <f:selectItems value="#{produtosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{ventasController.update}" value="#{bundle.EditVentasSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditVentasViewLink}"/>
+                <br />
+                <h:commandLink action="#{ventasController.prepareList}" value="#{bundle.EditVentasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditVentasIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

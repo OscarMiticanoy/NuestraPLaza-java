@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOfertasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOfertasLabel_idOfertas}"/>
+                    <h:outputText value="#{ofertasController.selected.idOfertas}" title="#{bundle.ViewOfertasTitle_idOfertas}"/>
+                    <h:outputText value="#{bundle.ViewOfertasLabel_fechaCosecha}"/>
+                    <h:outputText value="#{ofertasController.selected.fechaCosecha}" title="#{bundle.ViewOfertasTitle_fechaCosecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewOfertasLabel_cantidad}"/>
+                    <h:outputText value="#{ofertasController.selected.cantidad}" title="#{bundle.ViewOfertasTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewOfertasLabel_valor}"/>
+                    <h:outputText value="#{ofertasController.selected.valor}" title="#{bundle.ViewOfertasTitle_valor}"/>
+                    <h:outputText value="#{bundle.ViewOfertasLabel_codigoVendedor}"/>
+                    <h:outputText value="#{ofertasController.selected.codigoVendedor}" title="#{bundle.ViewOfertasTitle_codigoVendedor}"/>
+                    <h:outputText value="#{bundle.ViewOfertasLabel_idProducto}"/>
+                    <h:outputText value="#{ofertasController.selected.idProducto}" title="#{bundle.ViewOfertasTitle_idProducto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ofertasController.destroyAndView}" value="#{bundle.ViewOfertasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOfertasEditLink}"/>
+                <br />
+                <h:commandLink action="#{ofertasController.prepareCreate}" value="#{bundle.ViewOfertasCreateLink}" />
+                <br />
+                <h:commandLink action="#{ofertasController.prepareList}" value="#{bundle.ViewOfertasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOfertasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

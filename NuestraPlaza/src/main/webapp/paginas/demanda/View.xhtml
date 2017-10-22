@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewDemandaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewDemandaLabel_idDemanda}"/>
+                    <h:outputText value="#{demandaController.selected.idDemanda}" title="#{bundle.ViewDemandaTitle_idDemanda}"/>
+                    <h:outputText value="#{bundle.ViewDemandaLabel_cantidad}"/>
+                    <h:outputText value="#{demandaController.selected.cantidad}" title="#{bundle.ViewDemandaTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewDemandaLabel_valor}"/>
+                    <h:outputText value="#{demandaController.selected.valor}" title="#{bundle.ViewDemandaTitle_valor}"/>
+                    <h:outputText value="#{bundle.ViewDemandaLabel_codigoComprador}"/>
+                    <h:outputText value="#{demandaController.selected.codigoComprador}" title="#{bundle.ViewDemandaTitle_codigoComprador}"/>
+                    <h:outputText value="#{bundle.ViewDemandaLabel_idProducto}"/>
+                    <h:outputText value="#{demandaController.selected.idProducto}" title="#{bundle.ViewDemandaTitle_idProducto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{demandaController.destroyAndView}" value="#{bundle.ViewDemandaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewDemandaEditLink}"/>
+                <br />
+                <h:commandLink action="#{demandaController.prepareCreate}" value="#{bundle.ViewDemandaCreateLink}" />
+                <br />
+                <h:commandLink action="#{demandaController.prepareList}" value="#{bundle.ViewDemandaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewDemandaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

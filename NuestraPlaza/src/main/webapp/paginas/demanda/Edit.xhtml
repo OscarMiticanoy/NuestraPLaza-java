@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDemandaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDemandaLabel_idDemanda}" for="idDemanda" />
+                    <h:inputText id="idDemanda" value="#{demandaController.selected.idDemanda}" title="#{bundle.EditDemandaTitle_idDemanda}" required="true" requiredMessage="#{bundle.EditDemandaRequiredMessage_idDemanda}"/>
+                    <h:outputLabel value="#{bundle.EditDemandaLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{demandaController.selected.cantidad}" title="#{bundle.EditDemandaTitle_cantidad}" required="true" requiredMessage="#{bundle.EditDemandaRequiredMessage_cantidad}"/>
+                    <h:outputLabel value="#{bundle.EditDemandaLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{demandaController.selected.valor}" title="#{bundle.EditDemandaTitle_valor}" required="true" requiredMessage="#{bundle.EditDemandaRequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.EditDemandaLabel_codigoComprador}" for="codigoComprador" />
+                    <h:selectOneMenu id="codigoComprador" value="#{demandaController.selected.codigoComprador}" title="#{bundle.EditDemandaTitle_codigoComprador}" required="true" requiredMessage="#{bundle.EditDemandaRequiredMessage_codigoComprador}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDemandaLabel_idProducto}" for="idProducto" />
+                    <h:selectOneMenu id="idProducto" value="#{demandaController.selected.idProducto}" title="#{bundle.EditDemandaTitle_idProducto}" required="true" requiredMessage="#{bundle.EditDemandaRequiredMessage_idProducto}">
+                        <f:selectItems value="#{produtosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{demandaController.update}" value="#{bundle.EditDemandaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDemandaViewLink}"/>
+                <br />
+                <h:commandLink action="#{demandaController.prepareList}" value="#{bundle.EditDemandaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDemandaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
