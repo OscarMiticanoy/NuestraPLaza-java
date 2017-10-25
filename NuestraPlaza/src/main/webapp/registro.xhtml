@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>Bienvenido a nuestro portal de ventas</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    creado por: Grupo de trabajo cliente-servidor
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Ocultar" collapsible="true">
+                    <h:form>
+                    <p:menu>
+                        <p:submenu label="Recursos">
+                            <p:menuitem value="Ingresa" url="" />
+                            <p:menuitem value="Registrate" url="" />
+                            <p:menuitem value="Chat" url="" />
+                            <p:menuitem value="Contacto" url="" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                        </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <p:fieldset legend="Registro Datos Personales">                           
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_codigo}" for="codigo" />
+                                <h:inputText id="codigo" value="#{usuariosController.selected.codigo}" title="#{bundle.CreateUsuariosTitle_codigo}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_codigo}"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_nombres}" for="nombres" />
+                                <h:inputText id="nombres" value="#{usuariosController.selected.nombres}" title="#{bundle.CreateUsuariosTitle_nombres}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_nombres}"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_apellidos}" for="apellidos" />
+                                <h:inputText id="apellidos" value="#{usuariosController.selected.apellidos}" title="#{bundle.CreateUsuariosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_apellidos}"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_telefono}" for="telefono" />
+                                <h:inputText id="telefono" value="#{usuariosController.selected.telefono}" title="#{bundle.CreateUsuariosTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_telefono}"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_email}" for="email" />
+                                <h:inputText id="email" value="#{usuariosController.selected.email}" title="#{bundle.CreateUsuariosTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_email}"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_lugar}" for="lugar" />
+                                <h:inputText id="lugar" value="#{usuariosController.selected.lugar}" title="#{bundle.CreateUsuariosTitle_lugar}" />
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_calificacion}" for="calificacion" />
+                                <h:inputText id="calificacion" value="#{usuariosController.selected.calificacion}" title="#{bundle.CreateUsuariosTitle_calificacion}" readonly="readonly"/>
+                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_fecchaReg}" for="fecchaReg" />
+                                <p:calendar id="fecchaReg" value="#{usuariosController.selected.fecchaReg}" />
+
+                            </h:panelGrid>
+                        </p:fieldset><br />
+                        <h:commandLink action="#{usuariosController.create}" value="#{bundle.CreateUsuariosSaveLink}" />
+                        <br /><br />
+                        <h:commandLink action="#{usuariosController.prepareList}" value="#{bundle.CreateUsuariosShowAllLink}" immediate="true"/>
+                        <br /><br />
+                        <h:link outcome="/index" value="#{bundle.CreateUsuariosIndexLink}"/>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

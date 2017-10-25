@@ -28,7 +28,7 @@
                 <p:layoutUnit position="west" size="175" header="Ocultar" collapsible="true">
                     <p:menu>
                         <p:submenu label="Recursos">
-                            <p:menuitem value="Ingresa" outcome="/login" />
+                            <p:menuitem value="Ingresa" url="" />
                             <p:menuitem value="Registrate" outcome="/registro"/>
                             <p:menuitem value="Chat" url="" />
                             <p:menuitem value="Contacto" url="" />
@@ -39,7 +39,19 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                    <h:form>
+                        <h:panelGrid>
+                            <p:outputLabel for="txtUsuario" value="Usuario"/>
+                            <p:inputText id="txtUsuario" required="true"/>
+                            <p:outputLabel for="txtClave" value="Contraseña"/>
+                            <p:inputText id="txtClave" required="true"/>
+                            
+                            <h:column/>
+                            <p:commandButton icon="ui-icon-Key" value="Iniciar Sesion"/>
+                            <p:separator/>
+                            
+                        </h:panelGrid>
+                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>
