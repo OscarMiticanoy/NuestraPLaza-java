@@ -7,9 +7,11 @@ import com.mycompany.facade.UsuariosFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -22,26 +24,50 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class UsuariosController implements Serializable {
 
-    private Usuarios current;
+    private Usuarios usuario;
     private DataModel items = null;
     @EJB
-    private com.mycompany.facade.UsuariosFacade ejbFacade;
+    private UsuariosFacade ejbUsuario;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public UsuariosController() {
     }
+    
+     @PostConstruct
+    public void init(){
+        usuario = new Usuarios();
+    }
+    
+    public String iniciarSesion(){
+        Usuarios us;
+        String redireccion = null;
+        try{
+            us = this.ejbUsuario.iniciarSesion(usuario);
+            if(us!=null){
+                //alamacenar la sesion de JSF
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                redireccion = "index";
+            } else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "validacion", "no se encontro usuario"));
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "aviso", "verifique el nombre y la contraseña"));
+        }
+        return redireccion;
+    }
 
     public Usuarios getSelected() {
-        if (current == null) {
-            current = new Usuarios();
+        if (usuario == null) {
+            usuario = new Usuarios();
             selectedItemIndex = -1;
         }
-        return current;
+        return usuario;
     }
 
     private UsuariosFacade getFacade() {
-        return ejbFacade;
+        return ejbUsuario;
     }
 
     public PaginationHelper getPagination() {
@@ -68,20 +94,20 @@ public class UsuariosController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Usuarios) getItems().getRowData();
+        usuario = (Usuarios) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Usuarios();
+        usuario = new Usuarios();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            getFacade().create(current);
+            getFacade().create(usuario);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -91,14 +117,14 @@ public class UsuariosController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Usuarios) getItems().getRowData();
+        usuario = (Usuarios) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            getFacade().edit(current);
+            getFacade().edit(usuario);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosUpdated"));
             return "View";
         } catch (Exception e) {
@@ -108,7 +134,7 @@ public class UsuariosController implements Serializable {
     }
 
     public String destroy() {
-        current = (Usuarios) getItems().getRowData();
+        usuario = (Usuarios) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +157,7 @@ public class UsuariosController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            getFacade().remove(usuario);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -149,7 +175,7 @@ public class UsuariosController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            usuario = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -181,15 +207,15 @@ public class UsuariosController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(ejbUsuario.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbUsuario.findAll(), true);
     }
 
     public Usuarios getUsuarios(java.lang.String id) {
-        return ejbFacade.find(id);
+        return ejbUsuario.find(id);
     }
 
     @FacesConverter(forClass = Usuarios.class)
