@@ -6,9 +6,11 @@
 package com.mycompany.facade;
 
 import com.mycompany.entidades.Usuarios;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -17,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UsuariosFacade extends AbstractFacade<Usuarios> {
 
-    @PersistenceContext(unitName = "com.mycompany_NuestraPlaza_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "com.mycompany_proyecto1_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     @Override
@@ -29,4 +31,22 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         super(Usuarios.class);
     }
     
+    public Usuarios iniciarSesion(Usuarios us){
+        Usuarios usuario = null;
+        String consulta;
+        try{
+            consulta = "SELECT u FROM Usuarios u WHERE u.codigo = ?1 and u.contraseña = ?2";
+            Query query =em.createQuery(consulta);
+            query.setParameter(1, us.getCodigo());
+            query.setParameter(2, us.getContraseña());
+            List<Usuarios> lista = query.getResultList();
+            System.out.print(consulta);
+            if(!lista.isEmpty()){
+                usuario = lista.get(0);
+            }
+        }catch(Exception e){
+            System.out.print(e);
+        }
+        return usuario;
+    }
 }
