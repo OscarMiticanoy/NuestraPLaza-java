@@ -45,31 +45,33 @@
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
                     <h:form>
-                        <p:fieldset legend="Registro Datos Personales">                           
-                            <h:panelGrid columns="2">
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_codigo}" for="codigo" />
-                                <h:inputText id="codigo" value="#{usuariosController.selected.codigo}" title="#{bundle.CreateUsuariosTitle_codigo}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_codigo}"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_nombres}" for="nombres" />
-                                <h:inputText id="nombres" value="#{usuariosController.selected.nombres}" title="#{bundle.CreateUsuariosTitle_nombres}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_nombres}"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_apellidos}" for="apellidos" />
-                                <h:inputText id="apellidos" value="#{usuariosController.selected.apellidos}" title="#{bundle.CreateUsuariosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_apellidos}"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_telefono}" for="telefono" />
-                                <h:inputText id="telefono" value="#{usuariosController.selected.telefono}" title="#{bundle.CreateUsuariosTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_telefono}"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_email}" for="email" />
-                                <h:inputText id="email" value="#{usuariosController.selected.email}" title="#{bundle.CreateUsuariosTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_email}"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_lugar}" for="lugar" />
-                                <h:inputText id="lugar" value="#{usuariosController.selected.lugar}" title="#{bundle.CreateUsuariosTitle_lugar}" />
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_calificacion}" for="calificacion" />
-                                <h:inputText id="calificacion" value="#{usuariosController.selected.calificacion}" title="#{bundle.CreateUsuariosTitle_calificacion}" readonly="readonly"/>
-                                <h:outputLabel value="#{bundle.CreateUsuariosLabel_fecchaReg}" for="fecchaReg" />
-                                <p:calendar id="fecchaReg" value="#{usuariosController.selected.fecchaReg}" />
-
-                            </h:panelGrid>
-                        </p:fieldset><br />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_codigo}" for="codigo" />
+                            <h:inputText id="codigo" value="#{usuariosController.selected.codigo}" title="#{bundle.CreateUsuariosTitle_codigo}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_codigo}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_nombres}" for="nombres" />
+                            <h:inputText id="nombres" value="#{usuariosController.selected.nombres}" title="#{bundle.CreateUsuariosTitle_nombres}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_nombres}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_apellidos}" for="apellidos" />
+                            <h:inputText id="apellidos" value="#{usuariosController.selected.apellidos}" title="#{bundle.CreateUsuariosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_apellidos}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_contraseña}" for="contraseña" />
+                            <p:password id="contraseña" value="#{usuariosController.selected.contraseña}" inline="true" feedback="true" title="#{bundle.CreateUsuariosTitle_contraseña}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_contraseña}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_telefono}" for="telefono" />
+                            <h:inputText id="telefono" value="#{usuariosController.selected.telefono}" title="#{bundle.CreateUsuariosTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_telefono}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_email}" for="email" />
+                            <h:inputText id="email" value="#{usuariosController.selected.email}" title="#{bundle.CreateUsuariosTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_email}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_lugar}" for="lugar" />
+                            <h:inputText id="lugar" value="#{usuariosController.selected.lugar}" title="#{bundle.CreateUsuariosTitle_lugar}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_lugar}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_calificacion}" for="calificacion" />
+                            <h:inputText id="calificacion" value="#{usuariosController.selected.calificacion}" title="#{bundle.CreateUsuariosTitle_calificacion}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_calificacion}"/>
+                            <h:outputLabel value="#{bundle.CreateUsuariosLabel_fecchaReg}" for="fecchaReg" />
+                            <p:calendar id="fecchaReg" value="#{usuariosController.selected.fecchaReg}"/>
+                        </h:panelGrid>
+                        <br />
                         <h:commandLink action="#{usuariosController.create}" value="#{bundle.CreateUsuariosSaveLink}" />
-                        <br /><br />
+                        <br />
+                        <br />
                         <h:commandLink action="#{usuariosController.prepareList}" value="#{bundle.CreateUsuariosShowAllLink}" immediate="true"/>
-                        <br /><br />
+                        <br />
+                        <br />
                         <h:link outcome="/index" value="#{bundle.CreateUsuariosIndexLink}"/>
                     </h:form>
                 </p:layoutUnit>
