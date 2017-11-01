@@ -33,6 +33,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Usuarios.findByCodigo", query = "SELECT u FROM Usuarios u WHERE u.codigo = :codigo")
     , @NamedQuery(name = "Usuarios.findByNombres", query = "SELECT u FROM Usuarios u WHERE u.nombres = :nombres")
     , @NamedQuery(name = "Usuarios.findByApellidos", query = "SELECT u FROM Usuarios u WHERE u.apellidos = :apellidos")
+    , @NamedQuery(name = "Usuarios.findByContrase\u00f1a", query = "SELECT u FROM Usuarios u WHERE u.contrase\u00f1a = :contrase\u00f1a")
     , @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono")
     , @NamedQuery(name = "Usuarios.findByEmail", query = "SELECT u FROM Usuarios u WHERE u.email = :email")
     , @NamedQuery(name = "Usuarios.findByLugar", query = "SELECT u FROM Usuarios u WHERE u.lugar = :lugar")
@@ -60,9 +61,14 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
+    @Column(name = "contrase\u00f1a")
+    private String contraseña;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "telefono")
     private String telefono;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Correo electrónico no válido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
@@ -98,10 +104,11 @@ public class Usuarios implements Serializable {
         this.codigo = codigo;
     }
 
-    public Usuarios(String codigo, String nombres, String apellidos, String telefono, String email, String lugar, int calificacion, Date fecchaReg) {
+    public Usuarios(String codigo, String nombres, String apellidos, String contraseña, String telefono, String email, String lugar, int calificacion, Date fecchaReg) {
         this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.contraseña = contraseña;
         this.telefono = telefono;
         this.email = email;
         this.lugar = lugar;
@@ -131,6 +138,14 @@ public class Usuarios implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getTelefono() {
@@ -231,3 +246,4 @@ public class Usuarios implements Serializable {
     }
     
 }
+
