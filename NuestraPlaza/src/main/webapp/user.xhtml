@@ -1,0 +1,19 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>JSF 2 Custom Validator</title>
+    </h:head>
+    <h:body>
+       <h3>JSF 2 Custom Validator</h3>
+        <h:form id="userForm">
+			<h:outputLabel value="Enter Email:" />
+			<h:inputText id="emailId" value="#{userBean.email}">
+				<f:validator validatorId="emailValidator" />
+			</h:inputText>
+			<h:message for="emailId" style="color:red"/>
+			 <br /><h:commandButton value="Submit" action="#{userBean.save}"/>
+		</h:form>
+    </h:body>
+</html>
