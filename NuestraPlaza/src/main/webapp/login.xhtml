@@ -26,31 +26,33 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="175" header="Ocultar" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Recursos">
-                            <p:menuitem value="Ingresa" url="" />
-                            <p:menuitem value="Registrate" outcome="/registro"/>
-                            <p:menuitem value="Chat" url="" />
-                            <p:menuitem value="Contacto" url="" />
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Recursos">
+                                <p:menuitem value="Ingresa" url="" />
+                                <p:menuitem value="Registrate" outcome="/registro"/>
+                                <p:menuitem value="Chat" url="" />
+                                <p:menuitem value="Contacto" url="" />
 
-                        </p:submenu>
+                            </p:submenu>
 
-                    </p:menu>
+                        </p:menu>
+                    </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
                     <h:form>
-                        <h:panelGrid>
+                        <p:messages autoUpdate="true"/>
+                        <h:panelGrid columns="2">
                             <p:outputLabel for="txtUsuario" value="Usuario"/>
-                            <p:inputText id="txtUsuario" required="true"/>
+                            <p:inputText id="txtUsuario" value="#{usuariosController.selected.codigo}" required="true"/>
                             <p:outputLabel for="txtClave" value="Contraseña"/>
-                            <p:inputText id="txtClave" required="true"/>
+                            <p:inputText id="txtClave" value="#{usuariosController.selected.contraseña}" required="true"/>
                             
                             <h:column/>
-                            <p:commandButton icon="ui-icon-Key" value="Iniciar Sesion"/>
-                            <p:separator/>
-                            
+                            <p:commandButton icon="fa-key" value="Iniciar Sesion" action="#{usuariosController.iniciarSesion()}"/>
                         </h:panelGrid>
+                        <p:separator/>
                     </h:form>
                 </p:layoutUnit>
 
